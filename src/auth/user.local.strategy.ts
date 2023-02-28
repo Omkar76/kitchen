@@ -13,7 +13,7 @@ export class AdminLocalStrategy extends PassportStrategy(Strategy, 'admin-local'
   }
 
   async validate(username: string, password: string): Promise<Express.User> {
-    const user = await this.authService.validateAdmin(username, password);
+    const user = await this.authService.validateUser(username, password);
     // console.log("user", user)
     if (!user) {
       throw new UnauthorizedException();
@@ -21,6 +21,6 @@ export class AdminLocalStrategy extends PassportStrategy(Strategy, 'admin-local'
 
     // sets req.user 
     // add role
-    return {...user, role : Role.Admin}; 
+    return {...user, role : Role.User}; 
   }
 }

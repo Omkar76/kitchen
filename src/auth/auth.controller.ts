@@ -21,9 +21,9 @@ export class AuthController {
 
 
     // body must have {username, password}
-    @UseGuards(AuthGuard('local'))
+    @UseGuards(AuthGuard('admin-local'))
     @Post('admin')
     async login(@Req() req : Request) {
-        return this.authService.loginAdmin(req.user);
+        return this.authService.login(req.user);
     }
 }
