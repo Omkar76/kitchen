@@ -7,7 +7,7 @@ import { Admin } from '@prisma/client';
 import { Role } from 'src/types/role.enum';
 
 @Injectable()
-export class AdminLocalStrategy extends PassportStrategy(Strategy, 'admin-local') {
+export class UserLocalStrategy extends PassportStrategy(Strategy, 'user-local') {
   constructor(private authService: AuthService) {
     super();
   }
