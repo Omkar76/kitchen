@@ -34,8 +34,8 @@ export class AuthService {
         return null;
     }
 
-    // TODO : replace return type with user
-    async validateUser(username: string, password: string): Promise<Omit<Admin, "password">> {
+    // TODO : replace return type with Customer
+    async validateCustomer(username: string, password: string): Promise<Omit<Admin, "password">> {
         // TODO use data from db. use hashed password
         if (username == "user" && password == "strongpass") {
             return {

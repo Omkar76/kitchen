@@ -7,13 +7,13 @@ import { Admin } from '@prisma/client';
 import { Role } from 'src/types/role.enum';
 
 @Injectable()
-export class UserLocalStrategy extends PassportStrategy(Strategy, 'user-local') {
+export class CustomerLocalStrategy extends PassportStrategy(Strategy, 'customer-local') {
   constructor(private authService: AuthService) {
     super();
   }
 
   async validate(username: string, password: string): Promise<Express.User> {
-    const user = await this.authService.validateUser(username, password);
+    const user = await this.authService.validateCustomer(username, password);
     // console.log("user", user)
     if (!user) {
       throw new UnauthorizedException();
@@ -21,6 +21,6 @@ export class UserLocalStrategy extends PassportStrategy(Strategy, 'user-local') 
 
     // sets req.user 
     // add role
-    return {...user, role : Role.User}; 
+    return {...user, role : Role.Customer}; 
   }
 }
