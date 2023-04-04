@@ -10,9 +10,55 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// All three types of users are same model for now. 
+// Will change in future as needed
 model Admin{
   id Int @id @default(autoincrement())
   username String @unique
   displayName String
   password String
 }
+
+
+model Restaurant{
+  id Int @id @default(autoincrement())
+  name String
+  menu MenuItem[] 
+  state String
+  address String
+  ownerId Int @unique
+  fssaiLicenseNumber String
+  enrollmentYear Int
+  owner Owner @relation(fields: [ownerId], references: [id] )
+} 
+
+model Owner{
+  id Int @id @default(autoincrement())
+  username String @unique
+  displayName String
+  password String
+  restaurantId Int @unique
+  restaurant Restaurant? //@relation(fields: [restaurantId],  references: [id])
+}
+
+model Customer{
+  id Int @id @default(autoincrement())
+  username String @unique
+  displayName String
+  password String
+}
+
+// model Category{
+//   categoryName String
+// }
+
+model MenuItem{
+  id Int @id @default(autoincrement())
+  restaurantId Int
+  imageUrl String
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  name String 
+  description String
+  categories String[] // TODO: limit this value to specific enum/table column later 
+  price Decimal @db.Decimal(19, 4) // https://stackoverflow.com/questions/224462/
+}     

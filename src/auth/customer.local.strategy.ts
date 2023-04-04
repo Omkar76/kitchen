@@ -13,6 +13,7 @@ export class CustomerLocalStrategy extends PassportStrategy(Strategy, 'customer-
   }
 
   async validate(username: string, password: string): Promise<Express.User> {
+    console.log("oh god!")
     const user = await this.authService.validateCustomer(username, password);
     // console.log("user", user)
     if (!user) {
