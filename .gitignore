@@ -11,6 +11,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+hash
+password.mjs
 # OS
 .DS_Store
 
