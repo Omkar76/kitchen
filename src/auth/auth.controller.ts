@@ -13,12 +13,10 @@ export class AuthController {
 
     @UseGuards(AuthGuard("jwt"), RolesGuard)
     @Get("/status")
-    @Roles(Role.Admin)
+    @Roles(Role.Owner)
     test(@Req() req: Request){
         return req.user;
     }
-
-
 
     // body must have {username, password}
     @UseGuards(AuthGuard('admin-local'))
@@ -33,7 +31,7 @@ export class AuthController {
         return this.authService.login(req.user);
     }
 
-    @UseGuards(AuthGuard('cutomer-local'))
+    @UseGuards(AuthGuard('customer-local'))
     @Post('customer')
     async loginCustomer(@Req() req : Request) {
         return this.authService.login(req.user);
